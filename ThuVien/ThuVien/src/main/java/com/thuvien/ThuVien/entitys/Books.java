@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="books")
+@Table(name = "books")
 public class Books {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "tenSach")
+    @Column(name = "tenSach", nullable = false)
     private String tenSach;
 
     @Column(name = "tacGia")
@@ -28,13 +28,14 @@ public class Books {
     @Column(name = "namXuatBan")
     private Integer namXuatBan;
 
-    @Column(name = "theLoai")
-    private String theLoai;
+    // Gợi ý: dùng khóa ngoại liên kết với bảng TheLoai thay vì String
+    @ManyToOne
+    @JoinColumn(name = "theLoai_id", nullable = false)
+    private TheLoai theLoai;
 
-    @Column(name = "isbn" , unique = true)
+    @Column(name = "isbn", unique = true)
     private String isbn;
 
     @Column(name = "soLuong")
-    private String soLuong;
-
+    private Integer soLuong; // nên để kiểu số nguyên
 }
